@@ -41,18 +41,22 @@ if (prevMonth.total > 0) {
   diffEl.textContent = '-';
 }
 
-/* ── 카테고리 비중 (미니) ── */
+/* ── 카테고리 비중 (미니) ──
+   카테고리는 항상 전체 목록을 고정된 순서로 보여주고, 지출을 추가하면 해당 카테고리의 숫자만 갱신된다. */
 const miniEl = document.getElementById('mini-category');
-if (!thisMonth.byCategory.length) {
-  miniEl.innerHTML = `<div class="empty"><div class="empty__icon">📊</div><p>이번 달 지출 내역이 없습니다.</p></div>`;
-} else {
-  miniEl.innerHTML = thisMonth.byCategory.slice(0, 5).map((c) => `
+const byCategoryMap = new Map(thisMonth.byCategory.map((c) => [c.categoryId, c]));
+
+miniEl.innerHTML = Utils.getCategories().map((c) => {
+  const stat = byCategoryMap.get(c.id);
+  const amount  = stat?.amount ?? 0;
+  const percent = stat?.percent ?? 0;
+  return `
     <div class="mini-row">
       <span class="mini-label">${c.icon} ${c.name}</span>
-      <span class="mini-track"><span class="mini-fill" style="width:${(c.percent * 100).toFixed(1)}%; background:${c.color}"></span></span>
-      <span class="mini-amount">${Utils.formatCurrency(c.amount)}</span>
-    </div>`).join('');
-}
+      <span class="mini-track"><span class="mini-fill" style="width:${(percent * 100).toFixed(1)}%; background:${c.color}"></span></span>
+      <span class="mini-amount">${Utils.formatCurrency(amount)}</span>
+    </div>`;
+}).join('');
 
 /* ── 최근 지출 내역 ── */
 const recentEl = document.getElementById('recent-list');
