@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 로그인 — 가계부 Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="auth-card">
+  <div class="auth-logo">💰 가계부 <span class="admin-tag">Admin</span></div>
+  <p class="auth-sub">관리자 계정으로 로그인하세요</p>
+
+  <div class="auth-error" id="auth-error"></div>
+
+  <form id="admin-login-form" novalidate>
+    <div class="form-field">
+      <label class="form-label" for="f-id">관리자 ID</label>
+      <input class="form-input" type="text" id="f-id" placeholder="admin" required>
+    </div>
+    <div class="form-field">
+      <label class="form-label" for="f-password">비밀번호</label>
+      <input class="form-input" type="password" id="f-password" placeholder="비밀번호" required>
+    </div>
+    <button class="btn-submit" type="submit">로그인</button>
+  </form>
+
+  <p class="auth-hint">데모 계정 — ID: <code>admin</code> / 비밀번호: <code>admin123</code></p>
+  <a class="auth-back" href="../../index.html">← 홈으로 돌아가기</a>
+</div>
+
+<script src="../../js/data.js"></script>
+<script src="../../js/utils.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

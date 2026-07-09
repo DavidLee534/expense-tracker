@@ -27,9 +27,9 @@
 
 ## 3단계 — 관리자 인증 (`admin/auth/`)
 
-- [ ] `login.html` / `login.css` / `login.js`
-  - [ ] 고정 계정(`admin`/`admin123`) 검증
-  - [ ] 이미 로그인 상태면 `admin/index.html`로 자동 리다이렉트
+- [x] `login.html` / `login.css` / `login.js`
+  - [x] 고정 계정(`admin`/`admin123`) 검증
+  - [x] 이미 로그인 상태면 `admin/index.html`로 자동 리다이렉트
 
 ---
 
