@@ -1,0 +1,73 @@
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(145deg, #0B5A54 0%, #0F766E 50%, #34D399 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-surface);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-xl);
+  padding: var(--sp-10) var(--sp-8);
+}
+
+.auth-logo {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--sp-2);
+}
+
+.auth-sub { text-align: center; font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--sp-8); }
+
+.form-field { display: flex; flex-direction: column; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+.form-label { font-size: var(--text-sm); font-weight: var(--fw-semi); color: var(--color-text2); }
+.form-input {
+  padding: var(--sp-3) var(--sp-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--r-md);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  outline: none;
+  transition: border-color var(--dur-fast);
+}
+.form-input:focus { border-color: var(--color-accent); background: #fff; }
+.form-input.error { border-color: var(--color-danger); }
+.field-error { font-size: var(--text-xs); color: var(--color-danger); min-height: 1em; }
+
+.auth-error {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  margin-bottom: var(--sp-5);
+}
+.auth-error:empty { display: none; }
+
+.btn-submit {
+  width: 100%;
+  padding: var(--sp-3);
+  border-radius: var(--r-full);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: var(--fw-bold);
+  font-size: var(--text-base);
+  transition: background var(--dur-fast);
+  border: none;
+  cursor: pointer;
+}
+.btn-submit:hover { background: var(--color-primary-dk); }
+
+.auth-switch { text-align: center; margin-top: var(--sp-6); font-size: var(--text-sm); color: var(--color-muted); }
+.auth-switch a { color: var(--color-primary); font-weight: var(--fw-semi); }
+.auth-switch a:hover { text-decoration: underline; }
