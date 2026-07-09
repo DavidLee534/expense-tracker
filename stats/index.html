@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>통계 — 가계부</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<header class="topnav">
+  <a class="topnav__brand" href="../index.html">💰 가계부</a>
+  <nav class="topnav__links">
+    <a class="topnav__link" href="../index.html">대시보드</a>
+    <a class="topnav__link" href="../expenses/list.html">지출 내역</a>
+    <a class="topnav__link active" href="index.html">통계</a>
+  </nav>
+  <div class="topnav__user">
+    <span id="user-name"></span>
+    <button class="topnav__logout" id="logout-btn">로그아웃</button>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="page-head">
+    <h1 class="page-title">통계</h1>
+    <p class="page-sub">월별/연별 지출 흐름을 한눈에 확인하세요</p>
+  </div>
+
+  <!-- 카테고리별 비중 -->
+  <section class="panel">
+    <div class="panel__head">
+      <h2 class="panel__title">카테고리별 비중</h2>
+      <div class="panel__controls">
+        <input class="month-input" type="month" id="month-input">
+        <div class="chart-toggle" id="chart-toggle">
+          <button class="chart-toggle__btn active" data-view="donut">도넛</button>
+          <button class="chart-toggle__btn" data-view="bar">막대</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-body">
+      <div class="donut-wrap" id="donut-wrap"></div>
+      <ol class="rank-list" id="rank-list"></ol>
+    </div>
+  </section>
+
+  <!-- 월별 지출 추이 -->
+  <section class="panel">
+    <div class="panel__head">
+      <h2 class="panel__title">월별 지출 추이</h2>
+      <select class="year-select" id="year-select"></select>
+    </div>
+    <div class="trend-chart" id="trend-chart"></div>
+  </section>
+
+</main>
+
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
