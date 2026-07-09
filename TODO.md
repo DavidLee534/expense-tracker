@@ -2,17 +2,17 @@
 
 ## 1단계 — 공유 자원 (`css/`, `js/`)
 
-- [ ] `css/variables.css` — 전역 CSS 변수(민트/그린 톤 컬러·타이포·간격·그림자, 관리자 강조색 포함) + 리셋
-- [ ] `js/data.js` — 기본 카테고리 데이터 (`DEFAULT_CATEGORIES`: 식비·교통·주거·문화/여가·쇼핑·의료·교육·기타, 고정값·CRUD 없음)
-- [ ] `js/utils.js` — 공통 유틸리티 모듈 (`Utils`)
-  - [ ] 포맷: `formatCurrency`, `formatDate`
-  - [ ] 카테고리: `getCategories`, `getCategory` (읽기 전용, `DEFAULT_CATEGORIES` 그대로 반환)
-  - [ ] 고객 인증: `signup`, `login`(정지 계정 로그인 차단), `logout`, `getCurrentUser`, `isLoggedIn`
-  - [ ] 관리자 인증: `adminLogin`, `adminLogout`, `isAdminLoggedIn` — 고정 계정 `admin`/`admin123`
-  - [ ] 지출 내역 CRUD (현재 로그인한 고객 소유만): `getExpenses({from, to, categoryId, search})`, `getExpense`, `addExpense`, `updateExpense`, `deleteExpense`
-  - [ ] 개인 통계: `getMonthlyStats(year, month)`, `getYearlyStats(year)`, `getCategoryTotals({from, to})`
-  - [ ] 관리자 — 회원 관리: `getUsers({search})`, `getUser(id)`, `suspendUser(id)`, `unsuspendUser(id)`, `deleteUser(id)`(소유 지출 내역도 함께 삭제)
-  - [ ] 관리자 — 전체 통계: `getAdminStats()` (회원수, 총지출액, 이번 달 지출액, 인기 카테고리 TOP5, 최근 가입자)
+- [x] `css/variables.css` — 전역 CSS 변수(민트/그린 톤 컬러·타이포·간격·그림자, 관리자 강조색 포함) + 리셋
+- [x] `js/data.js` — 기본 카테고리 데이터 (`DEFAULT_CATEGORIES`: 식비·교통·주거·문화/여가·쇼핑·의료·교육·기타, 고정값·CRUD 없음)
+- [x] `js/utils.js` — 공통 유틸리티 모듈 (`Utils`)
+  - [x] 포맷: `formatCurrency`, `formatDate`
+  - [x] 카테고리: `getCategories`, `getCategory` (읽기 전용, `DEFAULT_CATEGORIES` 그대로 반환)
+  - [x] 고객 인증: `signup`, `login`(정지 계정 로그인 차단), `logout`, `getCurrentUser`, `isLoggedIn`
+  - [x] 관리자 인증: `adminLogin`, `adminLogout`, `isAdminLoggedIn` — 고정 계정 `admin`/`admin123`
+  - [x] 지출 내역 CRUD (현재 로그인한 고객 소유만): `getExpenses({from, to, categoryId, search})`, `getExpense`, `addExpense`, `updateExpense`, `deleteExpense`
+  - [x] 개인 통계: `getMonthlyStats(year, month)`, `getYearlyStats(year)`, `getCategoryTotals({from, to})`
+  - [x] 관리자 — 회원 관리: `getUsers({search})`, `getUser(id)`, `suspendUser(id)`, `unsuspendUser(id)`, `deleteUser(id)`(소유 지출 내역도 함께 삭제)
+  - [x] 관리자 — 전체 통계: `getAdminStats()` (회원수, 총지출액, 이번 달 지출액, 인기 카테고리 TOP5, 최근 가입자)
 
 ---
 

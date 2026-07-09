@@ -1,0 +1,106 @@
+/* ════════════════════════════════════════
+   전역 리셋
+════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; }
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
+button { cursor: pointer; border: none; background: none; }
+table { border-collapse: collapse; width: 100%; }
+
+/* ════════════════════════════════════════
+   전역 CSS 변수
+════════════════════════════════════════ */
+:root {
+  /* ── Brand Colors (mint / green) ── */
+  --color-primary:    #0F766E;
+  --color-primary-lt: #14B8A6;
+  --color-primary-dk: #0B5A54;
+  --color-accent:     #34D399;
+  --color-accent2:    #2DD4BF;
+  --color-admin:      #1E3A34;
+  --color-admin-lt:   #E3F3EE;
+
+  /* ── Semantic Colors ── */
+  --color-success:    #15803D;
+  --color-success-bg: #E7F6EC;
+  --color-warning:    #B45309;
+  --color-warning-bg: #FDF1DE;
+  --color-danger:     #B91C1C;
+  --color-danger-bg:  #FBEAEA;
+  --color-star:       #D97706;
+
+  /* ── Neutral ── */
+  --color-bg:          #F3FBF8;
+  --color-bg2:         #E8F6F1;
+  --color-surface:     #FFFFFF;
+  --color-border:      #DCEEE7;
+  --color-border2:     #C7E2D8;
+  --color-text:        #1F2E2A;
+  --color-text2:       #4B6259;
+  --color-muted:       #6E8880;
+  --color-placeholder: #9CB4AC;
+  --color-overlay:     rgba(15, 46, 40, 0.55);
+
+  /* ── Typography ── */
+  --font-heading: 'Poppins', 'Noto Sans KR', sans-serif;
+  --font-body:    'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+
+  --fw-normal:  400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+
+  /* ── Spacing (4px base) ── */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+
+  /* ── Border Radius ── */
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-xl:   16px;
+  --r-2xl:  24px;
+  --r-full: 9999px;
+
+  /* ── Shadows ── */
+  --sh-sm:  0 1px 3px rgba(15,46,40,.08), 0 1px 2px rgba(15,46,40,.06);
+  --sh-md:  0 4px 12px rgba(15,46,40,.10), 0 2px 4px rgba(15,46,40,.06);
+  --sh-lg:  0 8px 24px rgba(15,46,40,.12), 0 4px 8px rgba(15,46,40,.08);
+  --sh-xl:  0 16px 40px rgba(15,46,40,.14), 0 8px 16px rgba(15,46,40,.10);
+
+  /* ── Layout ── */
+  --header-h:    64px;
+  --container-w: 1100px;
+  --sidebar-w:   220px;
+
+  /* ── Transitions ── */
+  --dur-fast:   150ms;
+  --dur-normal: 250ms;
+  --dur-slow:   400ms;
+  --ease-out:   cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in:    cubic-bezier(0.4, 0.0, 1, 1);
+  --ease-inout: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
