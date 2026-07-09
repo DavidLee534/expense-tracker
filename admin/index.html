@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대시보드 — 가계부 Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar__brand">💰 가계부<span>Admin</span></div>
+    <nav class="sidebar__nav">
+      <a class="nav-item active" href="index.html">📊 대시보드</a>
+      <a class="nav-item" href="users/list.html">👥 회원 관리</a>
+    </nav>
+    <button class="sidebar__logout" id="logout-btn">로그아웃</button>
+    <a class="sidebar__home" href="../index.html">← 홈으로</a>
+  </aside>
+
+  <main class="main">
+
+    <div class="topbar">
+      <h1 class="page-title">대시보드</h1>
+      <p class="page-sub">서비스 전체 현황을 한눈에 확인하세요</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-card__label">전체 회원수</div>
+        <div class="stat-card__value" id="stat-users">0명</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__label">총 지출액</div>
+        <div class="stat-card__value" id="stat-total">0원</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__label">이번 달 지출액</div>
+        <div class="stat-card__value accent" id="stat-month">0원</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section class="panel">
+        <h2 class="panel__title">인기 카테고리 TOP5</h2>
+        <div class="bar-chart" id="top-categories"></div>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel__title">최근 가입 회원</h2>
+        <ul class="signup-list" id="signup-list"></ul>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
