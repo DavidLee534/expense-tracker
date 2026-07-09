@@ -35,12 +35,12 @@
 
 ## 4단계 — 고객 - 지출 내역 CRUD (`expenses/`, 전부 로그인 가드 적용)
 
-- [ ] `list.html` / `list.css` / `list.js`
-  - [ ] 기간 필터(이번 달/올해/직접 선택), 카테고리 필터, 검색(메모)
-  - [ ] 목록 테이블 + 합계 표시
-  - [ ] 삭제, 수정 페이지 링크
-- [ ] `create.html` / `create.css` / `create.js` — 금액·날짜·카테고리·메모 입력 폼 + 검증
-- [ ] `edit.html` / `edit.css` / `edit.js` — 기존 값 프리필 + 삭제 버튼 (`create.css` 재사용)
+- [x] `list.html` / `list.css` / `list.js`
+  - [x] 기간 필터(전체/이번 달/올해), 카테고리 필터, 검색(메모)
+  - [x] 목록 테이블 + 합계 표시
+  - [x] 삭제, 수정 페이지 링크
+- [x] `create.html` / `create.css` / `create.js` — 금액·날짜·카테고리·메모 입력 폼 + 검증
+- [x] `edit.html` / `edit.css` / `edit.js` — 기존 값 프리필 + 삭제 버튼 (`create.css` 재사용)
 
 ---
 
