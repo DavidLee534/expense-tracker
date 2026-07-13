@@ -1,0 +1,2 @@
+/* create.css 의 폼 스타일을 그대로 이어받고, 삭제 버튼 위치만 조정한다. */
+.btn-danger { margin-right: auto; }

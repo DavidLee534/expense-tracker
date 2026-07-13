@@ -1,0 +1,46 @@
+/* list.css 의 사이드바/버튼 스타일을 그대로 이어받는다. */
+
+.breadcrumb { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--sp-2); }
+.breadcrumb a { color: var(--color-admin); }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.btn { display: inline-flex; align-items: center; gap: var(--sp-2); padding: var(--sp-3) var(--sp-5); border-radius: var(--r-md); font-weight: var(--fw-semi); font-size: var(--text-sm); transition: all var(--dur-fast); border: none; cursor: pointer; }
+.btn-outline { background: transparent; color: var(--color-text2); border: 1px solid var(--color-border); }
+.btn-outline:hover { border-color: var(--color-admin); color: var(--color-admin); }
+.btn-warning { background: var(--color-warning-bg); color: var(--color-warning); }
+.btn-warning:hover { border-color: var(--color-warning); }
+.btn-danger { background: var(--color-danger-bg); color: var(--color-danger); }
+.btn-danger:hover { background: var(--color-danger); color: #fff; }
+
+.detail-grid { display: grid; grid-template-columns: 320px 1fr; gap: var(--sp-6); align-items: start; }
+
+.profile-card, .recent-card {
+  background: var(--color-surface);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--sh-sm);
+  padding: var(--sp-6);
+}
+
+.profile-name { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-primary); margin-bottom: var(--sp-1); }
+.profile-email { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--sp-5); }
+
+.profile-row { display: flex; justify-content: space-between; padding: var(--sp-3) 0; border-bottom: 1px solid var(--color-border); font-size: var(--text-sm); }
+.profile-row:last-of-type { border-bottom: none; }
+.profile-row__label { color: var(--color-muted); }
+.profile-row__value { font-weight: var(--fw-semi); color: var(--color-text); }
+
+.profile-actions { display: flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-5); }
+
+.recent-card__title { font-family: var(--font-heading); font-size: var(--text-lg); color: var(--color-primary); margin-bottom: var(--sp-4); }
+.recent-item { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--color-border); font-size: var(--text-sm); }
+.recent-item:last-child { border-bottom: none; }
+.recent-icon { font-size: var(--text-lg); }
+.recent-info { flex: 1; }
+.recent-name { font-weight: var(--fw-medium); color: var(--color-text); }
+.recent-date { font-size: var(--text-xs); color: var(--color-muted); }
+.recent-amount { font-weight: var(--fw-semi); color: var(--color-primary); }
+
+@media (max-width: 900px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}

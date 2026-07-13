@@ -1,0 +1,63 @@
+body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); min-height: 100vh; }
+
+/* ── Top Nav (다른 페이지와 동일 패턴) ── */
+.topnav { display: flex; align-items: center; gap: var(--sp-6); padding: 0 var(--sp-8); height: var(--header-h); background: var(--color-surface); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 100; }
+.topnav__brand { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700; color: var(--color-primary); }
+.topnav__links { display: flex; gap: var(--sp-2); flex: 1; }
+.topnav__link { padding: var(--sp-2) var(--sp-4); border-radius: var(--r-md); font-size: var(--text-sm); font-weight: var(--fw-medium); color: var(--color-muted); transition: all var(--dur-fast); }
+.topnav__link:hover { background: var(--color-bg2); color: var(--color-primary); }
+.topnav__link.active { background: var(--color-admin-lt); color: var(--color-primary); font-weight: var(--fw-semi); }
+.topnav__user { display: flex; align-items: center; gap: var(--sp-4); font-size: var(--text-sm); color: var(--color-text2); }
+.topnav__logout { padding: var(--sp-2) var(--sp-4); border-radius: var(--r-md); font-size: var(--text-xs); font-weight: var(--fw-medium); color: var(--color-muted); background: var(--color-bg); border: 1px solid var(--color-border); transition: all var(--dur-fast); }
+.topnav__logout:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+/* ── Main ── */
+.main { max-width: var(--container-w); margin: 0 auto; padding: var(--sp-8); }
+
+.page-head { margin-bottom: var(--sp-6); }
+.page-title { font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-primary); margin-bottom: var(--sp-1); }
+.page-sub { font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ── Stat Cards ── */
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin-bottom: var(--sp-6); }
+.stat-card { background: var(--color-surface); border-radius: var(--r-xl); padding: var(--sp-5) var(--sp-6); border: 1px solid var(--color-border); box-shadow: var(--sh-sm); }
+.stat-card__label { font-size: var(--text-xs); color: var(--color-muted); margin-bottom: var(--sp-1); }
+.stat-card__value { font-size: var(--text-2xl); font-weight: var(--fw-bold); color: var(--color-primary); }
+.stat-card__value.up { color: var(--color-danger); }
+.stat-card__value.down { color: var(--color-success); }
+
+/* ── Grid Panels ── */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+.panel { background: var(--color-surface); border-radius: var(--r-xl); border: 1px solid var(--color-border); box-shadow: var(--sh-sm); padding: var(--sp-6); }
+.panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--sp-5); }
+.panel__title { font-family: var(--font-heading); font-size: var(--text-lg); color: var(--color-primary); }
+.panel__link { font-size: var(--text-xs); color: var(--color-muted); font-weight: var(--fw-medium); }
+.panel__link:hover { color: var(--color-primary); }
+
+/* ── 미니 카테고리 비중 ── */
+.mini-body { display: flex; flex-direction: column; gap: var(--sp-3); }
+.mini-row { display: flex; align-items: center; gap: var(--sp-3); }
+.mini-label { flex: 0 0 90px; font-size: var(--text-sm); color: var(--color-text2); }
+.mini-track { flex: 1; height: 8px; background: var(--color-bg2); border-radius: var(--r-full); overflow: hidden; }
+.mini-fill { height: 100%; border-radius: var(--r-full); }
+.mini-amount { flex: 0 0 80px; text-align: right; font-size: var(--text-xs); color: var(--color-muted); }
+
+/* ── 최근 지출 ── */
+.recent-list { display: flex; flex-direction: column; gap: var(--sp-1); }
+.recent-item { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--color-border); }
+.recent-item:last-child { border-bottom: none; }
+.recent-icon { font-size: var(--text-lg); flex-shrink: 0; }
+.recent-info { flex: 1; }
+.recent-name { font-size: var(--text-sm); color: var(--color-text); font-weight: var(--fw-medium); }
+.recent-date { font-size: var(--text-xs); color: var(--color-muted); }
+.recent-amount { font-size: var(--text-sm); font-weight: var(--fw-semi); color: var(--color-primary); }
+
+.empty { text-align: center; padding: var(--sp-10); color: var(--color-muted); }
+.empty__icon { font-size: 2.5rem; margin-bottom: var(--sp-3); }
+
+@media (max-width: 900px) {
+  .topnav__links { display: none; }
+  .main { padding: var(--sp-5); }
+  .stat-row { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; }
+}

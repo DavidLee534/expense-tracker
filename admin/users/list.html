@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 관리 — 가계부 Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/variables.css">
+  <link rel="stylesheet" href="list.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar__brand">💰 가계부<span>Admin</span></div>
+    <nav class="sidebar__nav">
+      <a class="nav-item" href="../index.html">📊 대시보드</a>
+      <a class="nav-item active" href="list.html">👥 회원 관리</a>
+    </nav>
+    <button class="sidebar__logout" id="logout-btn">로그아웃</button>
+    <a class="sidebar__home" href="../../index.html">← 홈으로</a>
+  </aside>
+
+  <main class="main">
+
+    <div class="topbar">
+      <div>
+        <h1 class="page-title">회원 관리</h1>
+        <p class="page-sub">가입한 회원을 조회하고 정지/해제할 수 있습니다</p>
+      </div>
+      <input class="search-input" id="search-input" type="text" placeholder="이름 또는 이메일 검색">
+    </div>
+
+    <div class="table-wrap">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>가입일</th>
+            <th>지출 건수</th>
+            <th>총 지출액</th>
+            <th>상태</th>
+            <th>관리</th>
+          </tr>
+        </thead>
+        <tbody id="user-tbody"></tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="../../js/data.js"></script>
+<script src="../../js/utils.js"></script>
+<script src="list.js"></script>
+</body>
+</html>

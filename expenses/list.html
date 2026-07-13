@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>지출 내역 — 가계부</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="list.css">
+</head>
+<body>
+
+<header class="topnav">
+  <a class="topnav__brand" href="../index.html">💰 가계부</a>
+  <nav class="topnav__links">
+    <a class="topnav__link" href="../index.html">대시보드</a>
+    <a class="topnav__link active" href="list.html">지출 내역</a>
+    <a class="topnav__link" href="../stats/index.html">통계</a>
+  </nav>
+  <div class="topnav__user">
+    <span id="user-name"></span>
+    <button class="topnav__logout" id="logout-btn">로그아웃</button>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">지출 내역</h1>
+      <p class="page-sub">기간과 카테고리로 지출을 조회할 수 있어요</p>
+    </div>
+    <a class="btn btn-primary" href="create.html">+ 지출 추가</a>
+  </div>
+
+  <!-- 필터 -->
+  <div class="filter-bar">
+    <div class="period-btns" id="period-btns">
+      <button class="period-btn active" data-period="all">전체</button>
+      <button class="period-btn" data-period="month">이번 달</button>
+      <button class="period-btn" data-period="year">올해</button>
+    </div>
+    <select class="filter-select" id="category-filter">
+      <option value="all">전체 카테고리</option>
+    </select>
+    <input class="filter-search" id="search-input" type="text" placeholder="메모 검색">
+  </div>
+
+  <!-- 합계 -->
+  <div class="summary-card">
+    <span class="summary-label">조회된 지출 합계</span>
+    <span class="summary-value" id="summary-total">0원</span>
+  </div>
+
+  <!-- 테이블 -->
+  <div class="table-wrap">
+    <table class="expense-table">
+      <thead>
+        <tr>
+          <th>날짜</th>
+          <th>카테고리</th>
+          <th>메모</th>
+          <th>금액</th>
+          <th>관리</th>
+        </tr>
+      </thead>
+      <tbody id="expense-tbody"></tbody>
+    </table>
+  </div>
+
+</main>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="list.js"></script>
+</body>
+</html>
