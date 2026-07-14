@@ -35,13 +35,16 @@
 ### 고객
 - 회원가입 / 로그인 (이메일·비밀번호, 가입 즉시 자동 로그인)
 - 지출 CRUD — 등록·조회·수정·삭제, 기간·카테고리 필터, 메모 검색
+- 페이지네이션 — 지출 내역이 쌓여도 페이지당 10건씩 표시, 필터 변경 시 1페이지로 자동 리셋
 - 개인 통계 대시보드 — 월별/연별 합계, 카테고리 비중을 도넛·막대 차트 토글로 시각화
 - 고정 카테고리 8종 (식비·교통·주거·문화/여가·쇼핑·의료·교육·기타) 공용 사용
+- 게시판 — 절약 팁을 자유롭게 작성·검색하고 댓글로 소통 (본인 글/댓글 삭제 가능)
 
 ### 관리자
 - 고정 계정 로그인 (회원가입 없음)
 - 전체 통계 대시보드 — 전체 회원 수·총 지출액·이번 달 지출·인기 카테고리 TOP 5
 - 회원 관리 — 검색, 계정 정지/해제, 상세 화면에서 최근 지출 5건 확인
+- 게시판 관리 — 게시글 검색, 부적절한 글 삭제 (모더레이션)
 - 지출 데이터를 직접 등록하지 않고 조회·관리만 수행 (역할 분리)
 
 ## 설계 원칙
@@ -57,6 +60,9 @@
 erDiagram
     profiles ||--o{ expenses : "1:N"
     categories ||--o{ expenses : "1:N"
+    profiles ||--o{ posts : "1:N"
+    profiles ||--o{ comments : "1:N"
+    posts ||--o{ comments : "1:N"
 
     profiles {
         uuid id PK "→ auth.users"
@@ -81,6 +87,20 @@ erDiagram
         text icon
         text color
     }
+    posts {
+        uuid id PK
+        uuid user_id FK
+        text title
+        text content
+        timestamptz created_at
+    }
+    comments {
+        uuid id PK
+        uuid post_id FK
+        uuid user_id FK
+        text content
+        timestamptz created_at
+    }
 ```
 
 ## 기술 스택 진화 — localStorage → Supabase
@@ -90,11 +110,11 @@ erDiagram
 | 저장소 | 브라우저 `localStorage` | Supabase (PostgreSQL) |
 | 인증 | 비밀번호까지 평문 저장 (데모용) | Supabase Auth로 위임 |
 | 데이터 공유 | 브라우저·기기 간 공유 불가 | 서버 DB로 어디서든 동일 데이터 접근 |
-| 테이블 | 없음 | `profiles` / `categories` / `expenses` |
+| 테이블 | 없음 | `profiles` / `categories` / `expenses` / `posts` / `comments` |
 
 ## 보안 & 데이터 무결성
 
-- **Row Level Security (RLS)** — 고객은 본인 소유 데이터(profiles/expenses)만 조회·수정 가능, 관리자는 `role` 기반으로 전체 접근
+- **Row Level Security (RLS)** — 고객은 본인 소유 데이터(profiles/expenses/posts/comments)만 조회·수정 가능, 관리자는 `role` 기반으로 전체 접근 및 게시글·댓글 삭제(모더레이션) 가능
 - **재귀 없는 관리자 판별** — `profiles.role`을 정책 안에서 직접 조회하면 무한 재귀가 발생하므로 `SECURITY DEFINER` 함수(`is_admin()`)로 우회
 - **최소 권한 원칙** — Supabase Advisor로 내부 함수의 불필요한 RPC 노출을 점검해 `anon`/`authenticated`의 불필요한 `EXECUTE` 권한 회수
 - **인증 위임** — 비밀번호 저장·검증을 직접 구현하지 않고 Supabase Auth에 위임해 자체 구현 리스크 제거
@@ -119,7 +139,8 @@ expense-tracker/
 ├── auth/                                # 고객 회원가입 / 로그인
 ├── expenses/                            # 고객 지출 CRUD (list/create/edit)
 ├── stats/                               # 고객 통계 (월별/연별, 카테고리 비중)
-├── admin/                               # 관리자 (auth/users/대시보드)
+├── board/                               # 고객 게시판 (list/create/detail)
+├── admin/                               # 관리자 (auth/users/board/대시보드)
 ├── css/variables.css                    # 전역 CSS 변수 (민트/그린 톤)
 ├── js/data.js, js/utils.js              # 공용 카테고리 데이터 & 유틸리티
 └── portfolio/                           # 발표용 포트폴리오 PPT

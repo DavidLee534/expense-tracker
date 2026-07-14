@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원 상세 — 가계부 Admin</title>
+  <title>게시판 관리 — 가계부 Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/variables.css">
-  <link rel="stylesheet" href="list.css"><!-- 사이드바/테이블 스타일 공유 -->
-  <link rel="stylesheet" href="detail.css">
+  <link rel="stylesheet" href="list.css">
 </head>
 <body>
 
@@ -19,8 +18,8 @@
     <div class="sidebar__brand">💰 가계부<span>Admin</span></div>
     <nav class="sidebar__nav">
       <a class="nav-item" href="../index.html">📊 대시보드</a>
-      <a class="nav-item active" href="list.html">👥 회원 관리</a>
-      <a class="nav-item" href="../board/list.html">💬 게시판 관리</a>
+      <a class="nav-item" href="../users/list.html">👥 회원 관리</a>
+      <a class="nav-item active" href="list.html">💬 게시판 관리</a>
     </nav>
     <button class="sidebar__logout" id="logout-btn">로그아웃</button>
     <a class="sidebar__home" href="../../index.html">← 홈으로</a>
@@ -30,13 +29,26 @@
 
     <div class="topbar">
       <div>
-        <div class="breadcrumb"><a href="list.html">회원 관리</a> / 회원 상세</div>
-        <h1 class="page-title">회원 상세</h1>
+        <h1 class="page-title">게시판 관리</h1>
+        <p class="page-sub">고객이 남긴 절약 팁 게시글을 조회하고 삭제할 수 있습니다</p>
       </div>
-      <a class="btn btn-outline" href="list.html">← 목록으로</a>
+      <input class="search-input" id="search-input" type="text" placeholder="제목 또는 내용 검색">
     </div>
 
-    <div class="detail-grid" id="detail-grid"></div>
+    <div class="table-wrap">
+      <table class="post-table">
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>댓글</th>
+            <th>관리</th>
+          </tr>
+        </thead>
+        <tbody id="post-tbody"></tbody>
+      </table>
+    </div>
 
   </main>
 </div>
@@ -45,6 +57,6 @@
 
 <script src="../../js/data.js"></script>
 <script src="../../js/utils.js"></script>
-<script src="detail.js"></script>
+<script src="list.js"></script>
 </body>
 </html>

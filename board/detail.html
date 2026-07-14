@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 — 가계부</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+
+<header class="topnav">
+  <a class="topnav__brand" href="../index.html">💰 가계부</a>
+  <nav class="topnav__links">
+    <a class="topnav__link" href="../index.html">대시보드</a>
+    <a class="topnav__link" href="../expenses/list.html">지출 내역</a>
+    <a class="topnav__link" href="../stats/index.html">통계</a>
+    <a class="topnav__link active" href="list.html">게시판</a>
+  </nav>
+  <div class="topnav__user">
+    <span id="user-name"></span>
+    <button class="topnav__logout" id="logout-btn">로그아웃</button>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="breadcrumb"><a href="list.html">게시판</a> / 게시글</div>
+
+  <article class="post-card">
+    <div class="post-head">
+      <h1 class="post-title" id="post-title"></h1>
+      <button class="btn-del" id="post-delete-btn" hidden>삭제</button>
+    </div>
+    <div class="post-meta">
+      <span id="post-author"></span>
+      <span id="post-date"></span>
+    </div>
+    <p class="post-content" id="post-content"></p>
+  </article>
+
+  <section class="comments">
+    <h2 class="comments__title">댓글 <span id="comment-count">0</span></h2>
+
+    <form class="comment-form" id="comment-form">
+      <textarea class="comment-input" id="comment-input" rows="2" placeholder="댓글을 남겨보세요" maxlength="500" required></textarea>
+      <button class="btn btn-primary" type="submit">등록</button>
+    </form>
+
+    <ul class="comment-list" id="comment-list"></ul>
+  </section>
+
+</main>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/utils.js"></script>
+<script src="detail.js"></script>
+</body>
+</html>
