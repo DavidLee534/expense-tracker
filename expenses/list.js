@@ -7,6 +7,8 @@ if (!Utils.isLoggedIn()) {
 }
 
 let currentPeriod = 'all';
+let currentPage = 1;
+const PAGE_SIZE = 10;
 
 /* ── 상단 사용자 정보 ── */
 document.getElementById('user-name').textContent = `${Utils.getCurrentUser().name}님`;
@@ -54,10 +56,17 @@ function render() {
         <p>조건에 맞는 지출 내역이 없습니다.</p>
       </div>
     </td></tr>`;
+    document.getElementById('pagination').innerHTML = '';
     return;
   }
 
-  tbody.innerHTML = items.map((e) => {
+  const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+  currentPage = Math.min(currentPage, totalPages);
+  const pageItems = items.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  renderPagination(totalPages);
+
+  tbody.innerHTML = pageItems.map((e) => {
     const c = Utils.getCategory(e.categoryId);
     return `
     <tr>
@@ -75,6 +84,33 @@ function render() {
   }).join('');
 }
 
+/* ── 페이지네이션 ── */
+function renderPagination(totalPages) {
+  const nav = document.getElementById('pagination');
+  if (totalPages <= 1) {
+    nav.innerHTML = '';
+    return;
+  }
+
+  const btn = (label, page, { disabled = false, active = false } = {}) =>
+    `<button class="page-btn${active ? ' active' : ''}" data-page="${page}" ${disabled ? 'disabled' : ''}>${label}</button>`;
+
+  let html = btn('이전', currentPage - 1, { disabled: currentPage === 1 });
+  for (let p = 1; p <= totalPages; p++) {
+    html += btn(p, p, { active: p === currentPage });
+  }
+  html += btn('다음', currentPage + 1, { disabled: currentPage === totalPages });
+
+  nav.innerHTML = html;
+}
+
+document.getElementById('pagination').addEventListener('click', (e) => {
+  const btn = e.target.closest('.page-btn');
+  if (!btn || btn.disabled) return;
+  currentPage = Number(btn.dataset.page);
+  render();
+});
+
 /* ── 삭제 ── */
 function confirmDelete(id) {
   if (!confirm('이 지출 내역을 삭제할까요?\n이 작업은 되돌릴 수 없습니다.')) return;
@@ -90,10 +126,11 @@ document.getElementById('period-btns').addEventListener('click', (e) => {
   document.querySelectorAll('.period-btn').forEach((b) => b.classList.remove('active'));
   btn.classList.add('active');
   currentPeriod = btn.dataset.period;
+  currentPage = 1;
   render();
 });
-categorySelect.addEventListener('change', render);
-document.getElementById('search-input').addEventListener('input', render);
+categorySelect.addEventListener('change', () => { currentPage = 1; render(); });
+document.getElementById('search-input').addEventListener('input', () => { currentPage = 1; render(); });
 
 /* ── Toast ── */
 function toast(msg) {
