@@ -49,7 +49,7 @@ body { font-family: var(--font-body); background: var(--color-bg); color: var(--
 .sidebar__home:hover { color: rgba(255,255,255,.8); }
 
 .sidebar__logout {
-  margin: var(--sp-2) var(--sp-6) 0;
+  margin: var(--sp-2) var(--sp-6) var(--sp-4);
   padding: var(--sp-2) var(--sp-4);
   border-radius: var(--r-md);
   font-size: var(--text-xs);
