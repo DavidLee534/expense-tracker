@@ -1,11 +1,28 @@
 # 💰 연간 지출 관리 (expense-tracker)
 
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Vanilla](https://img.shields.io/badge/No%20Framework-Vanilla%20JS-2DD4BF)
+
 개인의 지출을 손쉽게 기록하고, 카테고리별·기간별 통계로 소비 패턴을 파악할 수 있는 지출 관리 웹 서비스입니다.
 고객은 본인의 지출을 기록·조회하고, 관리자는 회원과 서비스 전체 통계를 관리합니다.
 
 > 📎 발표용 포트폴리오: [`portfolio/expense-tracker-portfolio.pptx`](./portfolio/expense-tracker-portfolio.pptx)
 
 ---
+
+## 스크린샷
+
+| 고객 대시보드 | 지출 내역 |
+|---|---|
+| ![dashboard](./screenshots/dashboard.png) | ![expenses](./screenshots/expenses.png) |
+
+| 통계 (카테고리 비중 · 월별 추이) | 관리자 대시보드 |
+|---|---|
+| ![stats](./screenshots/stats.png) | ![admin](./screenshots/admin.png) |
 
 ## 프로젝트 개요
 
@@ -36,16 +53,34 @@
 
 ## 데이터 모델 (ERD)
 
-```
-profiles                    expenses                    categories
-─────────────────           ─────────────────           ─────────────────
-id (uuid, PK)      1 ─── N  id (uuid, PK)      N ─── 1   id (text, PK)
-  → auth.users               user_id (FK)                name / icon / color
-name                         category_id (FK)             고정 8종 · 읽기 전용
-email (unique)               amount (numeric, >0)         (CRUD 없음, seed 데이터)
-role: customer|admin         date
-status: active|suspended     memo · created_at
-created_at
+```mermaid
+erDiagram
+    profiles ||--o{ expenses : "1:N"
+    categories ||--o{ expenses : "1:N"
+
+    profiles {
+        uuid id PK "→ auth.users"
+        text name
+        text email UK
+        text role "customer | admin"
+        text status "active | suspended"
+        timestamptz created_at
+    }
+    expenses {
+        uuid id PK
+        uuid user_id FK
+        text category_id FK
+        numeric amount "> 0"
+        date date
+        text memo
+        timestamptz created_at
+    }
+    categories {
+        text id PK
+        text name
+        text icon
+        text color
+    }
 ```
 
 ## 기술 스택 진화 — localStorage → Supabase
@@ -66,8 +101,11 @@ created_at
 
 ## 협업 워크플로우
 
-```
-feat/shared → feat/auth → feat/core → main
+```mermaid
+graph LR
+    A[feat/shared] -->|PR| B[feat/auth]
+    B -->|PR| C[feat/core]
+    C -->|PR| D[main]
 ```
 
 - 공통 자원 → 인증 → 핵심 기능 순으로 브랜치를 나눠 작업 후 Pull Request로 `main`에 병합
