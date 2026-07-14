@@ -8,8 +8,8 @@
 파일명은 HTML과 동일하게 매칭한다 (`list.html` → `list.css`, `list.js`).
 
 ### 역할별 분리 (고객 / 관리자)
-- **고객**: 루트(`/`, `/auth/`, `/expenses/`, `/stats/`)에서 본인의 지출을 기록·조회한다.
-- **관리자**: `/admin/` 하위에서 회원 계정을 관리하고 서비스 전체 통계를 확인한다. 지출 데이터를 직접 등록하지는 않는다.
+- **고객**: 루트(`/`, `/auth/`, `/expenses/`, `/stats/`, `/board/`)에서 본인의 지출을 기록·조회하고, 게시판에서 절약 팁을 나눈다.
+- **관리자**: `/admin/` 하위에서 회원 계정과 게시판을 관리하고 서비스 전체 통계를 확인한다. 지출 데이터를 직접 등록하지는 않는다.
 - 두 영역은 `js/utils.js`가 제공하는 동일한 localStorage 데이터를 읽고 쓴다.
 
 ### 인증 (Auth)
@@ -33,10 +33,14 @@
 | `/expenses/create.html` | 고객 — 지출 추가 |
 | `/expenses/edit.html?id=…` | 고객 — 지출 수정 |
 | `/stats/index.html` | 고객 — 개인 월별/연별 통계 |
+| `/board/list.html` | 고객 — 게시판 목록 (검색) |
+| `/board/create.html` | 고객 — 글쓰기 |
+| `/board/detail.html?id=…` | 고객 — 게시글 상세 + 댓글 |
 | `/admin/auth/login.html` | 관리자 로그인 (고정 계정) |
 | `/admin/index.html` | 관리자 — 전체 통계 대시보드 (로그인 필요) |
 | `/admin/users/list.html` | 관리자 — 회원 목록, 검색, 정지/해제 (로그인 필요) |
 | `/admin/users/detail.html?id=…` | 관리자 — 회원 상세(가입일·지출 요약) + 정지/삭제 (로그인 필요) |
+| `/admin/board/list.html` | 관리자 — 게시글 검색·삭제 (로그인 필요) |
 
 ---
 
@@ -64,6 +68,12 @@ expense-tracker/
 │   └── stats/
 │       └── index.html / index.css / index.js    # 월별/연별 통계, 카테고리 비중 도넛 차트
 │
+├── 👤 고객 - 게시판
+│   └── board/
+│       ├── list.html / list.css / list.js       # 목록 (검색), 글쓰기 버튼
+│       ├── create.html / create.css / create.js # 글쓰기
+│       └── detail.html / detail.css / detail.js # 상세 + 댓글 (본인 글/댓글 삭제)
+│
 ├── 🔴 관리자
 │   └── admin/
 │       ├── auth/
@@ -71,9 +81,12 @@ expense-tracker/
 │       │
 │       ├── index.html / index.css / index.js       # 대시보드 — 전체 회원수·총지출액·인기 카테고리
 │       │
-│       └── users/
-│           ├── list.html / list.css / list.js       # 회원 목록, 검색, 정지/해제
-│           └── detail.html / detail.css / detail.js # 회원 상세 + 지출 요약 + 정지/삭제
+│       ├── users/
+│       │   ├── list.html / list.css / list.js       # 회원 목록, 검색, 정지/해제
+│       │   └── detail.html / detail.css / detail.js # 회원 상세 + 지출 요약 + 정지/삭제
+│       │
+│       └── board/
+│           └── list.html / list.css / list.js       # 게시글 검색·삭제 (모더레이션)
 │
 ├── 📦 공유 자원
 │   ├── css/
@@ -90,8 +103,10 @@ expense-tracker/
 | **User** | `id`, `name`, `email`, `password`, `status`(`active`\|`suspended`), `createdAt` |
 | **Category** | `id`, `name`, `icon`(이모지), `color` — `data.js`의 고정 배열, CRUD 없음 |
 | **Expense** | `id`, `userId`, `categoryId`, `amount`, `date`(YYYY-MM-DD), `memo`, `createdAt` |
+| **Post** | `id`, `userId`, `authorName`, `title`, `content`, `createdAt` — 본인 또는 관리자만 삭제 가능 |
+| **Comment** | `id`, `postId`, `userId`, `authorName`, `content`, `createdAt` — 본인 또는 관리자만 삭제 가능 |
 
-localStorage 키: `expense_users`, `expense_session`, `expense_admin_session`, `expense_records`
+localStorage 키: `expense_users`, `expense_session`, `expense_admin_session`, `expense_records`, `board_posts`, `board_comments`
 
 ## 🎨 디자인
 

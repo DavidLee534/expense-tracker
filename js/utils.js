@@ -13,6 +13,8 @@ const Utils = (() => {
     SESSION:       'expense_session',
     ADMIN_SESSION: 'expense_admin_session',
     EXPENSES:      'expense_records',
+    POSTS:         'board_posts',
+    COMMENTS:      'board_comments',
   };
 
   /* 관리자는 회원가입이 없으므로 고정 계정으로 로그인한다 (데모용). */
@@ -290,6 +292,87 @@ const Utils = (() => {
     return { userCount: users.length, totalAmount, thisMonthAmount, topCategories, recentSignups };
   }
 
+  /* ════════════════════
+     게시판 — 절약 팁 공유 (글 / 댓글)
+  ════════════════════ */
+  function _allPosts() { return _get(KEYS.POSTS) ?? []; }
+  function _allComments() { return _get(KEYS.COMMENTS) ?? []; }
+
+  function getPosts({ search } = {}) {
+    const q = search?.trim().toLowerCase();
+    const comments = _allComments();
+    return _allPosts()
+      .filter((p) => !q || p.title.toLowerCase().includes(q) || p.content.toLowerCase().includes(q))
+      .map((p) => ({ ...p, commentCount: comments.filter((c) => c.postId === p.id).length }))
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  }
+
+  function getPost(id) {
+    return _allPosts().find((p) => String(p.id) === String(id)) ?? null;
+  }
+
+  function createPost({ title, content }) {
+    const user = getCurrentUser();
+    if (!user) return null;
+    const post = {
+      id:         uid(),
+      userId:     user.id,
+      authorName: user.name,
+      title,
+      content,
+      createdAt:  new Date().toISOString(),
+    };
+    _set(KEYS.POSTS, [..._allPosts(), post]);
+    return post;
+  }
+
+  function deletePost(id) {
+    const user = getCurrentUser();
+    if (!user) return;
+    const post = getPost(id);
+    if (!post || post.userId !== user.id) return;
+    _set(KEYS.POSTS, _allPosts().filter((p) => String(p.id) !== String(id)));
+    _set(KEYS.COMMENTS, _allComments().filter((c) => String(c.postId) !== String(id)));
+  }
+
+  function deletePostAsAdmin(id) {
+    _set(KEYS.POSTS, _allPosts().filter((p) => String(p.id) !== String(id)));
+    _set(KEYS.COMMENTS, _allComments().filter((c) => String(c.postId) !== String(id)));
+  }
+
+  function getComments(postId) {
+    return _allComments()
+      .filter((c) => String(c.postId) === String(postId))
+      .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  }
+
+  function addComment(postId, content) {
+    const user = getCurrentUser();
+    if (!user) return null;
+    const comment = {
+      id:         uid(),
+      postId,
+      userId:     user.id,
+      authorName: user.name,
+      content,
+      createdAt:  new Date().toISOString(),
+    };
+    _set(KEYS.COMMENTS, [..._allComments(), comment]);
+    return comment;
+  }
+
+  function deleteComment(id) {
+    const user = getCurrentUser();
+    if (!user) return;
+    _set(KEYS.COMMENTS, _allComments().filter((c) =>
+      !(String(c.id) === String(id) && c.userId === user.id)
+    ));
+  }
+
+  function deleteCommentAsAdmin(id) {
+    _set(KEYS.COMMENTS, _allComments().filter((c) => String(c.id) !== String(id)));
+  }
+
   /* ── 공개 API ── */
   return {
     uid,
@@ -309,6 +392,9 @@ const Utils = (() => {
     getUsers, getUser, suspendUser, unsuspendUser, deleteUser,
     /* 관리자 — 전체 통계 */
     getAdminStats,
+    /* 게시판 */
+    getPosts, getPost, createPost, deletePost, deletePostAsAdmin,
+    getComments, addComment, deleteComment, deleteCommentAsAdmin,
   };
 
 })();

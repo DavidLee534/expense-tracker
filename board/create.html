@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>지출 추가 — 가계부</title>
+  <title>글쓰기 — 가계부</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,9 +16,9 @@
   <a class="topnav__brand" href="../index.html">💰 가계부</a>
   <nav class="topnav__links">
     <a class="topnav__link" href="../index.html">대시보드</a>
-    <a class="topnav__link active" href="list.html">지출 내역</a>
+    <a class="topnav__link" href="../expenses/list.html">지출 내역</a>
     <a class="topnav__link" href="../stats/index.html">통계</a>
-    <a class="topnav__link" href="../board/list.html">게시판</a>
+    <a class="topnav__link active" href="list.html">게시판</a>
   </nav>
   <div class="topnav__user">
     <span id="user-name"></span>
@@ -30,8 +30,8 @@
 
   <div class="page-head">
     <div>
-      <div class="breadcrumb"><a href="list.html">지출 내역</a> / 지출 추가</div>
-      <h1 class="page-title">지출 추가</h1>
+      <div class="breadcrumb"><a href="list.html">게시판</a> / 글쓰기</div>
+      <h1 class="page-title">글쓰기</h1>
     </div>
     <a class="btn btn-outline" href="list.html">← 목록으로</a>
   </div>
@@ -39,30 +39,20 @@
   <form class="form-card" id="create-form" novalidate>
 
     <div class="form-field">
-      <label class="form-label" for="f-amount">금액 <span class="required">*</span></label>
-      <input class="form-input" type="number" id="f-amount" placeholder="예: 12000" min="1" step="1" required>
-      <div class="field-error" id="err-amount"></div>
+      <label class="form-label" for="f-title">제목 <span class="required">*</span></label>
+      <input class="form-input" type="text" id="f-title" placeholder="예: 매달 10만원 더 모으는 방법" maxlength="60" required>
+      <div class="field-error" id="err-title"></div>
     </div>
 
     <div class="form-field">
-      <label class="form-label" for="f-date">날짜 <span class="required">*</span></label>
-      <input class="form-input" type="date" id="f-date" required>
-      <div class="field-error" id="err-date"></div>
-    </div>
-
-    <div class="form-field">
-      <label class="form-label">카테고리 <span class="required">*</span></label>
-      <div class="category-group" id="category-group"></div>
-    </div>
-
-    <div class="form-field">
-      <label class="form-label" for="f-memo">메모</label>
-      <input class="form-input" type="text" id="f-memo" placeholder="예: 점심 식사" maxlength="60">
+      <label class="form-label" for="f-content">내용 <span class="required">*</span></label>
+      <textarea class="form-textarea" id="f-content" rows="8" placeholder="절약 팁을 자유롭게 나눠주세요" maxlength="2000" required></textarea>
+      <div class="field-error" id="err-content"></div>
     </div>
 
     <div class="form-actions">
       <a class="btn btn-outline" href="list.html">취소</a>
-      <button class="btn btn-primary" type="submit">지출 추가</button>
+      <button class="btn btn-primary" type="submit">등록</button>
     </div>
   </form>
 
